@@ -12,8 +12,13 @@
 body {
   background-color: 'bg-gray-900';
   color: 'text-white';
+  scroll-behavior: smooth;
 }
 
 .font-didact {
   font-family: 'Didact Gothic', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
 }
