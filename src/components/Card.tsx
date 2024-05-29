@@ -28,7 +28,7 @@ const Card: React.FC<CardProps> = ({ card }) => {
     "Fusion Monster": "bg-purple-500",
     "Trap Card": "bg-pink-500",
     "Synchro Monster": "bg-gray-200",
-    Token: "bg-gray-400",
+    "Token": "bg-gray-400",
     "XYZ Monster": "bg-black",
   };
 
@@ -47,12 +47,12 @@ const Card: React.FC<CardProps> = ({ card }) => {
       />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{card.name}</div>
-        <p className="text-gray-700 text-base">{card.desc}</p>
+        <p className="text-white text-base">{card.desc}</p>
         {card.atk !== undefined && (
-          <p className="text-gray-700 text-base">ATK: {card.atk}</p>
+          <p className="text-white text-base">ATK: {card.atk}</p>
         )}
         {card.def !== undefined && (
-          <p className="text-gray-700 text-base">DEF: {card.def}</p>
+          <p className=" text-white text-base">DEF: {card.def}</p>
         )}
       </div>
     </div>
