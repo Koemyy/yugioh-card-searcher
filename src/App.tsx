@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Card from "./components/Card";
 import Navbar from "./components/NavBar";
 import BannerSection from "./components/BannerSection";
+import { animateScroll } from "react-scroll";
 
 interface CardData {
   id: number;
@@ -77,6 +78,17 @@ const Home = () => {
     }
   };
 
+const scrollToCardList = () => {
+  const cardListSection = document.getElementById("card-list");
+  if (cardListSection) {
+    const offsetTop = cardListSection.offsetTop;
+    animateScroll.scrollTo(offsetTop, {
+      duration: 800, // Duração da animação em milissegundos
+      smooth: "easeInOutQuart", // Curva de aceleração
+    });
+  }
+};
+
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -89,38 +101,44 @@ const Home = () => {
       <BannerSection
         title="Welcome to Yu-Gi-Oh! Cards"
         subtitle="Explore our collection of Yu-Gi-Oh! cards and find your favorites."
-        cta={{ label: "Get Started", link: "#card-list" }}
+        cta={{
+          label: "Get Started",
+          link: "#card-list",
+          action: scrollToCardList,
+        }}
         imageUrl="https://cdn.croct.io/workspace/customer-assets/358c56ab-5e63-4a67-9e93-c394c60edec5/dc4bba68-76fc-4d9d-838c-df4639cb1084"
       />
-      <div className="container mx-auto p-4">
-        <div className="flex mb-4">
-          <input
-            type="text"
-            placeholder="Search for cards..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full p-2 border border-gray-400 rounded mr-2"
-          />
-          <button
-            onClick={handleSearch}
-            className="p-2 bg-blue-500 text-white rounded"
-          >
-            Search
-          </button>
-        </div>
-        {loading ? (
-          <div className="text-center mt-4">Loading...</div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {cards.map((card) => (
-              <Card key={card.id} card={card} />
-            ))}
+      <section className="bg-gray-900">
+        <div className="container mx-auto p-4">
+          <div id="card-list" className="flex mb-4">
+            <input
+              type="text"
+              placeholder="Search for cards..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full p-2 border border-gray-400 rounded mr-2"
+            />
+            <button
+              onClick={handleSearch}
+              className="p-2 bg-blue-500 text-white rounded"
+            >
+              Search
+            </button>
           </div>
-        )}
-        {!hasMore && !loading && searchTerm === "" && (
-          <div className="text-center mt-4">No more cards to load.</div>
-        )}
-      </div>
+          {loading ? (
+            <div className="text-center mt-4">Loading...</div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {cards.map((card) => (
+                <Card key={card.id} card={card} />
+              ))}
+            </div>
+          )}
+          {!hasMore && !loading && searchTerm === "" && (
+            <div className="text-center mt-4">No more cards to load.</div>
+          )}
+        </div>
+      </section>
     </div>
   );
 };
