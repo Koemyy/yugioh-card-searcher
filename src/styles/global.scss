@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Didact Gothic";
+  src: url("https: //fonts.googleapis.com/css2?family=Didact+Gothic&display=swap")
+}
+
+body {
+  background-color: 'bg-gray-900';
+  color: 'text-white';
+}
+
+.font-didact {
+  font-family: 'Didact Gothic', sans-serif;
+}
