@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@croct/plug-react": "^0.7.1",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.19",
     "firebase": "^10.12.2",
