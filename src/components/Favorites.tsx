@@ -36,7 +36,7 @@ const Favorites: React.FC<FavoritesProps> = ({ userId }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {favoriteCards.map((card, index) => (
           <Card
-            key={`${card.id}-${index}`} // Combinação de card.id com índice
+            key={`${card.id}-${index}`}
             card={card}
             userId={userId}
             onFavoriteToggle={handleFavoriteToggle}
