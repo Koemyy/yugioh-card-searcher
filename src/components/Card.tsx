@@ -19,7 +19,7 @@ interface CardProps {
     }[];
   };
   userId: string;
-  onFavoriteToggle?: (cardId: number, isFavorite: boolean) => void;
+  onFavoriteToggle?: (cardId: number, isFavorite: boolean) => void; // Tornar opcional
 }
 
 function getUserId(): string {
@@ -98,6 +98,7 @@ const Card: React.FC<CardProps> = ({ card, onFavoriteToggle }) => {
 
   return (
     <div
+      key={`${card.id}-${userId}`}
       className={`relative max-w-sm rounded overflow-hidden shadow-lg ${cardColor} p-4`}
     >
       <img

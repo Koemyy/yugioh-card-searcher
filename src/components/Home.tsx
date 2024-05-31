@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import Card from "./Card";
 import BannerSection from "./BannerSection";
-import { animateScroll } from "react-scroll";
 
 interface CardData {
   id: number;
@@ -22,7 +21,7 @@ interface HomeProps {
   userId: string;
 }
 
-const Home: React.FC<HomeProps> = ({ userId }) => {
+function Home({ userId }: HomeProps) {
   const [cards, setCards] = useState<CardData[]>([]);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -81,17 +80,6 @@ const Home: React.FC<HomeProps> = ({ userId }) => {
     }
   };
 
-  const scrollToCardList = () => {
-    const cardListSection = document.getElementById("card-list");
-    if (cardListSection) {
-      const offsetTop = cardListSection.offsetTop;
-      animateScroll.scrollTo(offsetTop, {
-        duration: 800,
-        smooth: "easeInOutQuart",
-      });
-    }
-  };
-
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -100,16 +88,7 @@ const Home: React.FC<HomeProps> = ({ userId }) => {
 
   return (
     <div style={{ fontFamily: "Didact Gothic" }}>
-      <BannerSection
-        title="Welcome to Yu-Gi-Oh! Cards"
-        subtitle="Explore our collection of Yu-Gi-Oh! cards and find your favorites."
-        cta={{
-          label: "Get Started",
-          link: "#card-list",
-          action: scrollToCardList,
-        }}
-        imageUrl="https://cdn.croct.io/workspace/customer-assets/358c56ab-5e63-4a67-9e93-c394c60edec5/dc4bba68-76fc-4d9d-838c-df4639cb1084"
-      />
+      <BannerSection />
       <section className="bg-gray-900">
         <div className="container mx-auto p-4">
           <div id="card-list" className="flex mb-4">
@@ -131,8 +110,8 @@ const Home: React.FC<HomeProps> = ({ userId }) => {
             <div className="text-center mt-4">Loading...</div>
           ) : (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {cards.map((card) => (
-                <Card key={card.id} card={card} userId={userId} />
+              {cards.map((card, index) => (
+                <Card key={index} card={card} userId={userId} />
               ))}
             </div>
           )}
@@ -143,6 +122,6 @@ const Home: React.FC<HomeProps> = ({ userId }) => {
       </section>
     </div>
   );
-};
+}
 
 export default Home;
