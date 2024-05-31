@@ -34,9 +34,9 @@ const Favorites: React.FC<FavoritesProps> = ({ userId }) => {
     <div className="container mx-auto p-4">
       <h1 className="text-2xl text-white mb-4">Your Favorite Cards</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {favoriteCards.map((card) => (
+        {favoriteCards.map((card, index) => (
           <Card
-            key={card.id}
+            key={`${card.id}-${index}`} // Combinação de card.id com índice
             card={card}
             userId={userId}
             onFavoriteToggle={handleFavoriteToggle}
