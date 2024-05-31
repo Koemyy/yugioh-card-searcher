@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { doc, setDoc, deleteDoc, getDoc } from "firebase/firestore";
-import { db } from "../../firebaseConfig.ts"
+import { db } from "../../firebaseConfig";
 import { FaStar } from "react-icons/fa";
 
 interface CardProps {
@@ -18,7 +18,8 @@ interface CardProps {
       image_url: string;
     }[];
   };
-  userId:string, 
+  userId: string;
+  onFavoriteToggle?: (cardId: number, isFavorite: boolean) => void;
 }
 
 function getUserId(): string {
@@ -30,7 +31,7 @@ function getUserId(): string {
   return userId ? userId.split(";")[0] : "";
 }
 
-const Card: React.FC<CardProps> = ({ card }) => {
+const Card: React.FC<CardProps> = ({ card, onFavoriteToggle }) => {
   const [isFavorite, setIsFavorite] = useState(false);
   const userId = getUserId();
 
@@ -67,8 +68,10 @@ const Card: React.FC<CardProps> = ({ card }) => {
     try {
       if (isFavorite) {
         await deleteDoc(docRef);
+        if (onFavoriteToggle) onFavoriteToggle(card.id, false);
       } else {
         await setDoc(docRef, { ...card });
+        if (onFavoriteToggle) onFavoriteToggle(card.id, true);
       }
 
       setIsFavorite(!isFavorite);
