@@ -18,17 +18,15 @@ interface CardProps {
       image_url: string;
     }[];
   };
-  userId:string,
+  userId:string, 
 }
 
 function getUserId(): string {
   const cookieString = document.cookie;
-  console.log("Cookie String:", cookieString); // Logging cookie string for debugging
   const userId = cookieString
     .split("; ")
     .find((row) => row.startsWith("user_id="))
     ?.split("=")[1];
-  console.log("Extracted User ID:", userId); // Logging extracted user ID
   return userId ? userId.split(";")[0] : "";
 }
 
