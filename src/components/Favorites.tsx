@@ -24,7 +24,7 @@ const Favorites: React.FC<FavoritesProps> = ({ userId }) => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Your Favorite Cards</h1>
+      <h1 className="text-2xl text-white mb-4">Your Favorite Cards</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {favoriteCards.map((card) => (
           <Card key={card.id} card={card} userId={userId} />
